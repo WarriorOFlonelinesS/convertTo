@@ -1,0 +1,114 @@
+/* === Базовый Reset === */
+
+/* Убираем отступы и padding у всех элементов */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Гарантируем, что `html` и `body` заполняют всю высоту экрана */
+html, body {
+  height: 100%;
+}
+
+/* Унифицируем шрифт по умолчанию */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Убираем стандартные стили заголовков */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: normal;
+  font-size: inherit;
+}
+
+/* Убираем отступы у списков */
+ul, ol {
+  list-style: none;
+}
+
+/* Обнуляем ссылки */
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Обнуляем кнопки */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Делаем изображения адаптивными */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Убираем стандартные стили у таблиц */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+/* Обнуляем стили для input, textarea и select */
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* Убираем стрелки у input[type="number"] в WebKit */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Убираем стандартное выделение при фокусе */
+:focus {
+  outline: none;
+}
+
+/* Обнуляем стили цитат */
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* Убираем стандартное подчеркивание у аббревиатур */
+abbr[title] {
+  text-decoration: none;
+}
+
+/* Убираем выделение текста при нажатии */
+*::selection {
+  background: transparent;
+  color: inherit;
+}
+
+/* Добавляем нормализацию для скрытия элементов */
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
