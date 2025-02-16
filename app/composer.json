@@ -1,9 +1,11 @@
 {
-  "name": "yourname/yourproject",
-  "description": "A project using PHP and PostgreSQL with class autoloading.",
+  "name": "warrior-of-loneliness/convert-to-api",
+  "description": "A project using PHP API for converting files",
   "type": "project",
   "require": {
-      "php": "^8.1"
+      "php": "^8.1",
+      "troydavisson/phrets": "2.*",
+      "monolog/monolog": ">=1.10"
   },
   "autoload": {
       "psr-4": {

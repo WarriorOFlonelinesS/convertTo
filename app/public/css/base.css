@@ -10,6 +10,8 @@
 /* Гарантируем, что `html` и `body` заполняют всю высоту экрана */
 html, body {
   height: 100%;
+  background: linear-gradient(to bottom, #ffb6b6, #b7a4f7); /* Градиентный фон */
+  min-height: 100vh;
 }
 
 /* Унифицируем шрифт по умолчанию */
@@ -18,8 +20,9 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: #333;
-  background-color: #fff;
+  
   -webkit-font-smoothing: antialiased;
+
 }
 
 /* Убираем стандартные стили заголовков */
@@ -112,3 +115,4 @@ abbr[title] {
   display: none !important;
   visibility: hidden;
 }
+
