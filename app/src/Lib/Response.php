@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 namespace App\Lib;
 
 class Response
 {
   private $status = 200;
-  
+
   public function status(int $code)
   {
     $this->status = $code;
@@ -17,5 +17,7 @@ class Response
     http_response_code($this->status);
     header('contentType: application/json');
     echo json_encode($data);
+    $code = http_response_code();
+    echo "Current HTTP Status: " . $code;
   }
 }
