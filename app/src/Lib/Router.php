@@ -9,7 +9,7 @@ class Router
   }
   public static function post($route, $callback){
     if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0){
-      var_dump($_SERVER['REQUEST_METHOD']); // Должно быть "POST"
+
 
       return;
     }
@@ -23,8 +23,8 @@ class Router
     $regex = str_replace('/', '\/', $regex);
     $is_match = preg_match('/^' . $regex . '$/', $params, $matches, PREG_OFFSET_CAPTURE);
 
-
     if ($is_match){
+      var_dump($matches);
       array_shift($matches);
       
       $params = array_map(function ($param){

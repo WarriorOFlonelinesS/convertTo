@@ -1,18 +1,14 @@
 <?php namespace App\Lib;
 
-  class File{
-    public string $file_name;
-    public $data;
+ abstract class File{
+    protected string $fileName;
+    protected $data;
 
-    public function __construct($file_name, $data){
-      $this->file_name = $file_name;
+    public function __construct($fileName, $data){
+      $this->fileName = $fileName;
       $this->data = $data;
-
     }
 
-    public function saveData(){
-      $myfile = fopen($this->file_name, "w");
-      fwrite($myfile, $this->data);
-      fclose($myfile);
-    }
+    abstract public function convertFile($to);
+
   }
