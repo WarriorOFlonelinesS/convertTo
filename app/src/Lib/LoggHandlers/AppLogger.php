@@ -1,4 +1,4 @@
-<?php namespace App\Lib;
+<?php namespace App\Lib\LoggHandlers;
 
 use Monolog\ErrorHandler;
 use Monolog\Handler\StreamHandler;

@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Lib;
+<?php namespace App\Lib\ApiHandlers;
 
 class Response
 {
