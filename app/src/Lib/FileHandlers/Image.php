@@ -14,8 +14,8 @@ class Image extends File
 
   public function convertFile($to)
   {
-      $this->getFile($this->extension);
-   
+
+    if (!$this->getFile($this->extension)) {
       
       $image = imagecreatefromstring(file_get_contents($this->data));
 
@@ -25,6 +25,7 @@ class Image extends File
 
       $outPath = Constants::OUT_DIR . pathinfo($this->fileName, PATHINFO_FILENAME) . ".$to";
 
+      
       try {
         switch ($to) {
           case 'png': {
@@ -49,7 +50,11 @@ class Image extends File
         }
 
       } finally {
+      header("Content-disposition: attachment;filename=$outPath");
+      readfile($outPath);
         imagedestroy($image);
       }
     }
+
+  }
 }

@@ -1,7 +1,18 @@
 <?php namespace App\Lib\ApiHandlers;
 class Router
 {
+  public static function handleCors(){
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type");
+
+    if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
+      http_response_code(204);
+      exit;
+    }
+  }
   public static function get($route, $callback){
+    self::handleCors();
     if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') !== 0 ){
       return;
     }

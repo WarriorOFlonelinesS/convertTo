@@ -1,13 +1,14 @@
 <?php namespace App\Lib\FileHandlers;
 
  abstract class File{
+    private $maxSize;
     protected string $fileName;
     protected string $data;
 
     public function __construct($fileName, $data){
       $this->fileName = $fileName;
       $this->data = $data;
-      
+      $this->maxSize  = 100 * 1024 * 1024;
     }
 
     private function checkFileExtention($extension){
