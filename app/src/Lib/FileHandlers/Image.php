@@ -14,8 +14,8 @@ class Image extends File
 
   public function convertFile($to)
   {
-
-    if (!$this->getFile($this->extension)) {
+      $this->getFile($this->extension);
+   
       
       $image = imagecreatefromstring(file_get_contents($this->data));
 
@@ -52,6 +52,4 @@ class Image extends File
         imagedestroy($image);
       }
     }
-
-  }
 }

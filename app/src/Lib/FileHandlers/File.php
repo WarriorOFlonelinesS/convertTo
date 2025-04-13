@@ -10,17 +10,18 @@
       
     }
 
-    private function checkFile($extension){
+    private function checkFileExtention($extension){
       $dangerousExtensions = ['exe', 'js', 'bat', 'vbs', 'scr', 'lnk', 'dll', 'com', 'cmd'];
       if(in_array($extension, $dangerousExtensions)){
         throw new \Exception('This file has dangerous extension!');
       }
     } 
+
     
     protected function getFile($extension){
-      return $this->checkFile($extension);
+      return $this->checkFileExtention($extension);
     }
 
     abstract public function convertFile($to);
-   
+
   }

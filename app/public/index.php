@@ -5,8 +5,6 @@ use App\Lib\LoggHandlers\App;
 use App\Lib\FileHandlers\Image;
 use App\Lib\ApiHandlers\Router;
 use App\Lib\ApiHandlers\Response;
-use App\Lib\ApiHandlers\Request;
-
 
 Router::get('/', fn(Response $response): int => print ($response->toJSON(['message' => 'Welcome to ConvertTo API', 'version' => '1.0.0', 'status' => 'API is running', 'timestamp' => time()])));
 
@@ -16,7 +14,7 @@ Router::post('/convert/image', function (Response $response) {
     if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
       return $response->status(400)->toJSON(['message' => 'No file uploaded or upload error occurred']);
     }
-
+    var_dump($_FILES);
     $uploadData = $_FILES['file']['tmp_name'];
     $fileExtension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
     $to = isset($_GET['to']) ? $_GET['to'] : '';
