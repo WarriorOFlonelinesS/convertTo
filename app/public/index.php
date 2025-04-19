@@ -11,29 +11,34 @@ Router::get('/', fn(Response $response): int => print ($response->toJSON(['messa
 Router::post('/convert/image', function (Response $response) {
   try {
 
-    if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+    if (!isset($_FILES['file'])) {
       return $response->status(400)->toJSON(['message' => 'No file uploaded or upload error occurred']);
     }
-    var_dump($_FILES);
-    $uploadData = $_FILES['file']['tmp_name'];
-    $fileExtension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
     $to = isset($_GET['to']) ? $_GET['to'] : '';
-    $fileName = basename($_FILES['file']['name'], "." . $fileExtension);
-    $filePath = basename($_FILES['file']['name']);
-    $targetPath = Constants::UPLOAD_DIR . $filePath;
+    foreach ($_FILES['file']['tmp_name'] as $key => $upload_data) {
 
-    if (!move_uploaded_file($uploadData, Constants::UPLOAD_DIR . $filePath)) {
-      throw new \Exception;
+
+      if ($_FILES['file']['error'][$key] !== UPLOAD_ERR_OK) {
+        return $response->status(400)->toJSON(['message' => 'No file uploaded or upload error occurred']);
+      }
+
+      $uploadData = $_FILES['file']['tmp_name'][$key];
+      $fileExtension = pathinfo($_FILES['file']['name'][$key], PATHINFO_EXTENSION);
+      $fileName = basename($_FILES['file']['name'][$key], "." . $fileExtension);
+      $filePath = basename($_FILES['file']['name'][$key]);
+      $targetPath = Constants::UPLOAD_DIR . $filePath;
+
+      if (!move_uploaded_file($uploadData, Constants::UPLOAD_DIR . $filePath)) {
+        throw new \Exception;
+      }
+
+      (new Image($fileName, $targetPath, $fileExtension))->convertFile($to);
+
     }
-
-    $file = new Image($fileName, $targetPath, $fileExtension);
-    $file->convertFile($to);
-    $response->status(201);
-    return $response->toJSON(['message' => 'File converted and saved successfully']);
+    return $response->status(201)->toJSON(['message' => 'File converted and saved successfully']);
   } catch (\Exception $e) {
 
-    $response->status(500);
-    return $response->toJSON(['message' => $e->getMessage()]);
+    return $response->status(500)->toJSON(['message' => $e->getMessage()]);
   }
 
 });

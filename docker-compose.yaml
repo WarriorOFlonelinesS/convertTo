@@ -16,11 +16,12 @@ services:
 
   app:
     build:
-      dockerfile: ./php/Dockerfile
+      dockerfile: ./Dockerfile
     container_name: app
     volumes:
       - /var/www/html/vendor
       - ./app:/var/www/html
+      - ./config/php/php/php.ini:/usr/local/etc/php/php.ini
     networks:
       - app-network
 

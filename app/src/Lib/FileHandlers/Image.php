@@ -42,16 +42,16 @@ class Image extends File
           }
           case 'gif': {
             imagegif($image, $outPath);
+          
             break;
           }
           default:
-            imagedestroy($image);
-            throw new \Exception("This format isn't supported: " . $to);
+          imagedestroy($image);
+          throw new \Exception("This format isn't supported: " . $to);
         }
-
       } finally {
-      header("Content-disposition: attachment;filename=$outPath");
-      readfile($outPath);
+        header("Content-disposition: attachment;filename=$outPath");
+        readfile($outPath);
         imagedestroy($image);
       }
     }

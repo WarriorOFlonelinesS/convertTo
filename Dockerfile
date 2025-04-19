@@ -1,5 +1,6 @@
 FROM php:8.1-fpm-alpine
 
+COPY ./config/php/php/php.ini /usr/local/etc/php/php.ini
 
 ENV composer_allow_super_user=1
 COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
