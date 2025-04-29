@@ -1,9 +1,11 @@
-<?php
+<?php 
 namespace App\Lib\FileHandlers;
 use App\Lib\Constants;
 use App\Lib\FileHandlers\File;
+use FFMpeg;
+use FFMpeg\Format\Video\X264;
 
-class Image extends File
+class Video extends File
 {
   public string $extension;
   public function __construct($fileName, $data, $extension)
@@ -15,12 +17,15 @@ class Image extends File
   public function convertFile($to)
   {
 
+ 
     if (!$this->getFile($this->extension)) {
       
-      $image = imagecreatefromstring(file_get_contents($this->data));
 
-      if (!$image) {
-        throw new \Exception("Failed to create image from data");
+      $ffmpeg = FFMpeg\FFMpeg::create();
+      $video = $ffmpeg->open($this->data);
+    
+      if (!$video) {
+        throw new \Exception("Failed to open the video!");
       }
 
       $outPath = Constants::OUT_DIR . pathinfo($this->fileName, PATHINFO_FILENAME) . ".$to";
@@ -28,32 +33,17 @@ class Image extends File
       
       try {
         switch ($to) {
-          case 'png': {
-            imagepng($image, $outPath);
-            break;
-          }
-          case 'jpg': {
-            imagejpeg($image, $outPath);
-            break;
-          }
-          case 'bmp': {
-            imagebmp($image, $outPath);
-            break;
-          }
-          case 'gif': {
-            imagegif($image, $outPath);
-
+          case 'mp4': {
+            $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
+            $video->save($format, $this->fileName);
             break;
           }
           default:
-          imagedestroy($image);
           throw new \Exception("This format isn't supported: " . $to);
-         
         }
       } finally {
         header("Content-disposition: attachment;filename=$outPath");
         readfile($outPath);
-        imagedestroy($image);
       }
     }
 

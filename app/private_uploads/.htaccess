@@ -1,1 +1,4 @@
 Deny from all
+<FilesMatch "\.(php|js|exe|pl|py)$">
+  Require all denied
+</FilesMatch>

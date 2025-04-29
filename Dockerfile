@@ -8,7 +8,8 @@ COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 COPY ./app/composer.* ./
 RUN apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev
 
-# Устанавливаем и конфигурируем расширение GD
+RUN apk add --no-cache ffmpeg
+
 RUN docker-php-ext-configure gd \
     --with-freetype \
     --with-jpeg \
