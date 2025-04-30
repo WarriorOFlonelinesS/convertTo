@@ -71,7 +71,7 @@ Router::post('/convert/video', function (Response $response) {
       if (!move_uploaded_file($uploadData, Constants::UPLOAD_DIR . $filePath)) {
         throw new \Exception;
       }
-
+      var_dump($targetPath);
       (new Video($fileName, $targetPath, $fileExtension))->convertFile($to);
       Cleaner::clean($targetPath);
     }

@@ -13,11 +13,10 @@ class Video extends File
     parent::__construct($fileName, $data, );
     $this->extension = $extension;
   }
-
+  
   public function convertFile($to)
   {
-
- 
+   
     if (!$this->getFile($this->extension)) {
       
 
@@ -35,9 +34,22 @@ class Video extends File
         switch ($to) {
           case 'mp4': {
             $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
-            $video->save($format, $this->fileName);
+            $video->save($format,  $outPath);
             break;
           }
+          case 'webm': {
+            $format = new FFMpeg\Format\Video\WebM('libvorbis', 'libvpx');
+            $video->save($format, $outPath);
+            break;
+          }
+          case 'flv': {
+            $format = new X264('libmp3lame', 'libx264');
+            $format->setAdditionalParameters(['-f', 'flv']);
+            
+            $video->save($format, $outPath);
+            break;
+          }
+       
           default:
           throw new \Exception("This format isn't supported: " . $to);
         }
