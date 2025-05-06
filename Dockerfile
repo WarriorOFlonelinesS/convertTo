@@ -10,10 +10,14 @@ RUN apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev
 
 RUN apk add --no-cache ffmpeg
 
+RUN apk add --no-cache libzip-dev
+
 RUN docker-php-ext-configure gd \
     --with-freetype \
     --with-jpeg \
  && docker-php-ext-install -j$(nproc) gd
+
+RUN docker-php-ext-install zip
 
 RUN composer install --prefer-dist --no-dev --no-scripts --no-interaction --no-progress
 
