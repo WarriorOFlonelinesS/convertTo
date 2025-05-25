@@ -151,7 +151,7 @@ Router::post('/convert/document', function (Response $response) {
       }
   
       (new Document($fileName, $targetPath, $fileExtension))->convertFile($to);
-      Cleaner::clean($targetPath);
+      // Cleaner::clean($targetPath);
     }
 
     return $response->status(201)->toJSON(['message' => 'File converted and saved successfully']);

@@ -22,8 +22,6 @@ class Audio extends File
   {
 
     if (!$this->getFile($this->extension)) {
-
-
       $ffmpeg = FFMpeg\FFMpeg::create();
       $audio = $ffmpeg->open($this->data);
 
